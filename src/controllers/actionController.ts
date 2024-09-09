@@ -5,6 +5,7 @@ export const logProductActionController = async (
   req: Request,
   res: Response
 ) => {
+  console.log("salom");
   const { product_id, shop_id, action_type, action_details } = req.body;
   if (!product_id || !shop_id || !action_type) {
     return res.status(400).json({ error: "Missing required fields" });

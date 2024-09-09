@@ -3,15 +3,17 @@ import express from "express";
 import bodyParser from "body-parser";
 import actionRoutes from "./routes/actionRoutes";
 import { testConnection } from "./db/dbConnect";
+import { swaggerUi, swaggerSpec } from "./swagger";
+import cors from "cors";
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.use("/api/v1", actionRoutes);
-
-// Start the server
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 (async () => {
   try {
     await testConnection();
